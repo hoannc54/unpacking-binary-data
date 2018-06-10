@@ -136,7 +136,7 @@ The above example will print the following when run.
 
 Below we will go into the details of how the format specifier works. I'll split the format, giving the details for each character.
 
-    $header_format = 'A6Version/C2Width/C2Height/C1Flag/@11/C1Aspect';
+    $header_format = 'A6Version/C2Width/C2Height/C1Flag/@11/C1Aspect';    
     
     A - Read a byte and interpret it as a string. 
         Number of bytes to read is given next
