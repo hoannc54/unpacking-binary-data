@@ -1,10 +1,10 @@
 
 [Source](https://www.codediesel.com/php/unpacking-binary-data/ "Permalink to Unpacking binary data in PHP")
 
-# Unpacking binary dât in PHP (Giải mã dữ liệu nhị phân trong PHP)
+# Unpacking binary data in PHP (Giải mã dữ liệu nhị phân trong PHP)
 
 Trong PHP ta hiếm khi phải làm việc và thao tác với các file nhị phân. Tuy nhiên, khi cần thì hàm 'pack' và 'unpack' trong PHP có thể gíup ích đáng kể. Để chuẩn bị, ta sẽ bắt đầu với một vấn đề trong lập trình, điều này sẽ gíup cuộc thảo luận luôn gắn với một đến bối cảnh liên quan. Vấn đề ở đây là: Chúng ta muốn viết một hàm nhận một file ảnh làm tham số đầu vào kết quả sẽ cho chúng ta biết liệu file đó có là ảnh GIF hay không. Chúng ta không được phép sử dụng bất kỳ hàm của thư viện GD nào.
-
+T
 #### Header trong file GIF
 
 Với yêu cầu đặt ra là chúng ta không được sử dụng bất kỳ hàm đồ họa nào, để giải quyết vấn đề chúng ta sẽ cần lấy những dữ liệu liên quan từ chính file GIF. Khác với các định dạng của các file văn bản như HTML hay XML, file GIF và hầu hết các định dạng của hình ảnh khác được lưu dưới định dạng nhị phân. Hầu hết các file nhị phân sẽ bao gồm một header nằm ở đầu của file chứa thông tin meta liên quan đến file cụ thể đó. Chúng ta có thể sử dụng thông tin này để biết được kiểu của file là gì và các thứ khác nữa, ví dụ như chiều cao và chiều rộng nếu ta đang xét đến file GIF. Một header dạng thô điển hình của file GIF được mô tả bên dưới, sử dụng trình sọan thảo kiểu hex như [WinHex][1].
