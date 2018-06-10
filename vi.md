@@ -13,10 +13,7 @@ With the requirement that we are not allowed to use any graphics functions, to s
 
 The detailed description of the header is given below.
 
-| ----- |
-| 
-    
-    
+        
     Offset   Length   Contents
       0      3 bytes  "GIF"
       3      3 bytes  "87a" or "89a"
@@ -32,29 +29,17 @@ The detailed description of the header is given below.
              ? bytes  
              1 bytes   (0x3b)
 
- | 
-
 So to check if the image file is a valid GIF, we need to check the starting 3 bytes of the header, which have the 'GIF' marker, and the next 3 bytes, which give the version number; either '87a' or '89a'. It is for tasks such as these that the unpack() function is indispensable. Before we look at the solution, we will take a quick look at the unpack() function itself.
 
 #### Using the unpack() function
 
 [unpack()][3] is the complement of [pack()][4] – it transforms binary data into an associative array based on the format specified. It is somewhat along the lines of _sprintf_, transforming string data according to some given format. These two functions allow us to read and write buffers of binary data according to a specified format string. This easily enables a programmer to exchange data with programs written in other languages or other formats. Take a small example.
-
-| ----- |
-| 
-    
-    
+      
     $data = unpack('C*', 'codediesel');
     var_dump($data);
 
- | 
-
 This will print the following, decimal codes for 'codediesel' :
-
-| ----- |
-| 
-    
-    
+  
     array
       1 => int 99
       2 => int 111
@@ -67,8 +52,6 @@ This will print the following, decimal codes for 'codediesel' :
       9 => int 101
       10 => int 108
 
- | 
-
 In the above example the first argument is the format string and the second the actual data. The format string specifies how the data argument should be parsed. In this example the first part of the format 'C', specifies that we should treat the first character of the data as a unsigned byte. The next part '*', tells the function to apply the previously specified format code to all the remaining characters.
 
 Although this may look confusing, the next section provides a concrete example.
@@ -77,10 +60,6 @@ Although this may look confusing, the next section provides a concrete example.
 
 Below is the solution to our GIF problem using the unpack() function. The _is_gif()_ function will return true if the given file is in a GIF format.
 
-| ----- |
-| 
-    
-    
     function is_gif($image_file)
     {
      
@@ -105,16 +84,10 @@ Below is the solution to our GIF problem using the unpack() function. The _is_gi
     /* Run our example */
     echo is_gif("aboutus.gif");
 
- | 
-
 The important line to note is the format specifier. The 'A6' characters specifies that the unpack() function is to get the the first 6 bytes of the data and interpret it as a string. The retrieved data is then stored in an associate array with the key named 'version'.
 
 Another example is given below. This returns some additional header data of the GIF file, including the image width and height.
-
-| ----- |
-| 
-    
-    
+ 
     function get_gif_header($image_file)
     {
      
@@ -148,14 +121,8 @@ Another example is given below. This returns some additional header data of the 
     /* Run our example */
     print_r(get_gif_header("aboutus.gif"));
 
- | 
-
 The above example will print the following when run.
-
-| ----- |
-| 
-    
-    
+ 
     Array
     (
         [Version] => GIF89a
@@ -167,21 +134,9 @@ The above example will print the following when run.
         [Aspect] => 0
     )
 
- | 
-
 Below we will go into the details of how the format specifier works. I'll split the format, giving the details for each character.
 
-| ----- |
-| 
-    
-    
     $header_format = 'A6Version/C2Width/C2Height/C1Flag/@11/C1Aspect';
-
- | 
-
-| ----- |
-| 
-    
     
     A - Read a byte and interpret it as a string. 
         Number of bytes to read is given next
@@ -213,8 +168,6 @@ Below we will go into the details of how the format specifier works. I'll split 
     C - Interpret the data as an unsigned byte
     1 - Read a total of 1 bytes
     Aspect - Key in the associative array
-
- | 
 
 More format options can be found [here][4]. Although I've only shown a small example, the pack/unpack is capable of much complex work than presented here.
 
