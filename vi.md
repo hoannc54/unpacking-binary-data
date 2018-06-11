@@ -3,7 +3,7 @@
 
 # Unpacking binary data in PHP (Giải mã dữ liệu nhị phân trong PHP)
 
-Trong PHP ta hiếm khi phải làm việc và thao tác với các file nhị phân. Tuy nhiên, khi cần thì hàm 'pack' và 'unpack' trong PHP có thể gíup ích đáng kể. Để chuẩn bị, ta sẽ bắt đầu với một vấn đề trong lập trình, điều này sẽ gíup cuộc thảo luận luôn gắn với một đến bối cảnh liên quan. Vấn đề ở đây là: Chúng ta muốn viết một hàm nhận một file ảnh làm tham số đầu vào kết quả sẽ cho chúng ta biết liệu file đó có là ảnh GIF hay không. Chúng ta không được phép sử dụng bất kỳ hàm của thư viện GD nào.
+Trong PHP ta hiếm khi phải làm việc và thao tác với các file nhị phân. Tuy nhiên, khi cần thì hàm 'pack' và 'unpack' trong PHP có thể gíup ích đáng kể. Để chuẩn bị, ta sẽ bắt đầu với một vấn đề trong lập trình, điều này sẽ gíup cuộc thảo luận luôn gắn với một đến bối cảnh liên quan. Vấn đề ở đây là: Chúng ta muốn viết một hàm nhận một file ảnh làm tham số đầu vào kết quả sẽ cho chúng ta biết liệu file đó có là ảnh GIF hay không, mà không liên quan tới extension của file. Chúng ta không được phép sử dụng bất kỳ hàm của thư viện GD nào.
 
 #### Header trong file GIF
 
@@ -33,12 +33,12 @@ Vậy để kiểm tra xem liệu một file ảnh là file chuẩn GIF hay khô
 
 #### Sử dụng hàm unpack()
 
-[unpack()][3] là sự bổ sung của [pack()][4] - nó chuyển hóa dữ liệu nhị phân thành mảng dựa trên định dạng cho trước. Điều này có điểm giống với _sprintf_, chuyển hóa dữ liệu chuỗi theo một vài định dạng cho trước. Hai hàm này cho phép chúng ta đọc và viết các bộ đệm nhị phâm theo định dạng chuỗi cho trước. Điều dễ dàng cho phép một lập trình viên trao đổi dữ liệu giữa các chương trình được viết bằng các ngôn ngữ hoặc định dạng khác nhau. Hãy cùng xem ví dụ nhỏ sau đây.
+[unpack()][3] là sự bổ sung của [pack()][4] - nó chuyển hóa dữ liệu nhị phân thành mảng dựa trên định dạng cho trước. Điều này có điểm giống với _sprintf_, chuyển hóa dữ liệu chuỗi theo một vài định dạng cho trước. Hai hàm này cho phép chúng ta đọc và ghi các bộ đệm nhị phâm theo định dạng chuỗi cho trước. Điều dễ dàng cho phép một lập trình viên trao đổi dữ liệu giữa các chương trình được viết bằng các ngôn ngữ hoặc định dạng khác nhau. Hãy cùng xem ví dụ nhỏ sau đây.
       
     $data = unpack('C*', 'codediesel');
     var_dump($data);
 
-Đoạn code trên sẽ in ra như sau, đó là các số thập phân tương ứng với 'codediesel' :
+Đoạn code trên sẽ in ra như sau, đó là các mã thập phân tương ứng với 'codediesel' :
   
     array
       1 => int 99
